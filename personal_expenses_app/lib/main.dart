@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-
-import './transaction.dart';
+import 'package:personal_expenses_app/widgets/user_transactions.dart';
+import './widgets/user_transactions.dart';
+import './widgets/transaction_list.dart';
+import './widgets/new_transactions.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,43 +17,33 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final List<Transaction> transactions = [
-    Transaction(
-      id: 't1',
-      title: 'new shoes',
-      amount: 69.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'food',
-      amount: 85.43,
-      date: DateTime.now(),
-    ),
-  ];
+  // String titleInput;
+  // String amountInput;
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text('Flutter App'),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                child: Text('chart'),
-                elevation: 5,
-                color: Colors.blue,
+        body: SingleChildScrollView(
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                width: double.infinity,
+                child: Card(
+                  child: Text('chart'),
+                  elevation: 5,
+                  color: Colors.blue,
+                ),
               ),
-            ),
-            Column(children: transactions.map((tx) {
-              return Card(child: Text(tx.title),
-            );
-            }).toList()
-            ),
-          ],
+              UserTransactions(),
+            ],
+          ),
         ));
   }
 }
